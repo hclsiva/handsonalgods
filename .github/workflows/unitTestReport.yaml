@@ -23,6 +23,7 @@ jobs:
           
       - name: Build with Maven
         run: mvn test
+        if: always()
       
       - name: Publish Unit Test Results
         uses: mikepenz/action-junit-report@v2
