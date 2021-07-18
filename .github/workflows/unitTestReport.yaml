@@ -28,7 +28,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          artifact: target
+          artifact: target/surefire-reports
           name: JUnit Tests
-          path: surefire-reports/*.xml
+          path: '*.xml'
           reporter: jest-junit
