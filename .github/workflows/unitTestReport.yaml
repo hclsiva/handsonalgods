@@ -25,10 +25,4 @@ jobs:
         run: mvn test
       
       - name: Publish Unit Test Results
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          artifact: TEST-(*)
-          name: JUnit Tests
-          path: '*.xml'
-          reporter: java-junit
+        uses: scacap/action-surefire-report@v1
