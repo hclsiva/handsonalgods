@@ -24,7 +24,8 @@ public class TestCountingSort {
         return unsortedArray;
     }
     private int[] getOneMillionEntries(){
-        return null;
+        int[] unsortedArray = generateRandomNumber(1,9,10000000);
+        return unsortedArray;
     }
     private int[] generateRandomNumber(int min, int max,int size){
         Random random = new Random();
@@ -51,5 +52,14 @@ public class TestCountingSort {
         Arrays.sort(unsortedArray);
         int[] expectedOutput = unsortedArray;
         assertArrayEquals(countingSortOutput,expectedOutput);
+    }
+    @Test
+    @DisplayName("Counting Sort with One Million Entries")
+    public void testCountingSortWithOneMillionInput(){
+        int[] unsortedArray = getOneThousandEntries();
+        int[] countingSortOutput = sorting.sort(unsortedArray);
+        //Arrays.sort(unsortedArray);
+        //int[] expectedOutput = unsortedArray;
+        assertArrayEquals(countingSortOutput,unsortedArray);
     }
 }
