@@ -1,8 +1,12 @@
-public class CountingSort {
+package sorting.countingsort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class CountingSort {
+    static final Logger log = LoggerFactory.getLogger(CountingSort.class);
     public int[] sort(int[] inputArray){
         int[] noOfOccurences = new int[10];
-        System.out.println("Length of an Input array = " +inputArray.length);
+        log.info("Length of an Input array = " +inputArray.length);
         int[] sortedArray = new int[inputArray.length];
         updateOccurences(inputArray,noOfOccurences);
         printArrayWithIndices(noOfOccurences);
@@ -34,15 +38,15 @@ public class CountingSort {
     }
     public void printArrayWithIndices(int[] values){
         for(int i =0; i < values.length; i++){
-            System.out.printf(" %d - %d ",i,values[i]);
+            log.info(i + " - " +values[i]);
         }
-        System.out.println();
+        log.info("");
     }
     public void printArray(int[] values){
         for(int i =0; i < values.length; i++){
-            System.out.printf(" %d, ",values[i]);
+            log.info(""+values[i]);
         }
-        System.out.println();
+        log.info("");
     }
     public static void main(String[] args){
         int[] inputArray = new int[]{2,3,3,4,5,5,6,6,7,7,1,6,1,3,8,9,8,1,2};
