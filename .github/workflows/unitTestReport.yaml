@@ -31,4 +31,4 @@ jobs:
           artifact: target/surefire-reports
           name: JUnit Tests
           path: '*.xml'
-          reporter: jest-junit
+          reporter: java-junit
