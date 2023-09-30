@@ -53,7 +53,6 @@ public class TestCountingSort {
         int[] expectedOutput = unsortedArray;
         assertArrayEquals(countingSortOutput,expectedOutput);
     }
-    @Test
     @DisplayName("Counting Sort with One Million Entries")
     public void testCountingSortWithOneMillionInput(){
         int[] unsortedArray = getOneThousandEntries();
