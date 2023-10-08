@@ -17,7 +17,7 @@ public class SquirrelJump {
 		SquirrelJump.jump(bars);
 		bars = new int[]{1};
 		SquirrelJump.jump(bars);
-
+		
 	}
 
 	private static void jump(int[] bars){
@@ -27,7 +27,9 @@ public class SquirrelJump {
 		}
 		maxJumpStep = maxJumps;
 		int position = findMaxJumpPosition();
-		positionForStep(bars,position);
+		//positionForStep(bars,position);
+		List<Integer> steps = findStepsAtPosition(bars,position);
+		System.out.println(steps);
 		positionStepsMap.clear();
 		stepsMap.clear();
 		System.out.println("Max number of jumps: " + maxJumps);
@@ -55,8 +57,6 @@ public class SquirrelJump {
 				break;
 			}
 		}
-
-
 		return position;
 	}
 
@@ -70,14 +70,43 @@ public class SquirrelJump {
 		}
 		return position;
 	}
-
+	public static List<Integer> findStepsAtPosition(int[] bars, int position) {
+		List<Integer> steps = new ArrayList<>();
+		Map<Integer,Integer> possibleJumpMap = null;
+		int i = position;
+		steps.add(position);
+		while(i >= 0 && i < bars.length){
+			possibleJumpMap = possibleJumpList(bars,i);
+			if(possibleJumpMap.size() == 0){
+				break;
+			}
+			i = possibleJumpMap.get(Collections.max(possibleJumpMap.keySet()));
+			steps.add(i);
+		}
+		return steps;
+	}
+	private static Map<Integer,Integer> possibleJumpList(int[] bars,int position){
+		Map<Integer,Integer> possibleJumpMap = new HashMap<Integer, Integer>();
+		if((position+2) < bars.length && bars[position+2] < bars[position] ){
+			possibleJumpMap.put(bars[position+2],position+2);
+		}
+		if((position+1) < bars.length && bars[position+1] < bars[position] ){
+			possibleJumpMap.put(bars[position+1],position+1);
+		}	
+		if((position-2) >= 0 && bars[position-2] < bars[position] ){
+			possibleJumpMap.put(bars[position-2],position-2);
+		}
+		if((position-1) >= 0 && bars[position-1] < bars[position] ){
+			possibleJumpMap.put(bars[position-1],position-1);
+		}	
+		return possibleJumpMap;
+	}
 	public static int positionForStep(int[] bars, int position) {
 		stepsMap.putIfAbsent("LEFT",new ArrayList<>());
 		int resultPos = 0;
 		int i = 0;
 		for(i = position ; i > 0;i = resultPos ) {
 			int max = 0;
-
 			if (i - 2 >= 0 ) {
 				if (bars[i] > bars[i - 2] && bars[i] > bars[i - 1]) {
 					if (bars[i - 2] > bars[i - 1]) {
