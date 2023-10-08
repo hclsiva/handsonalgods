@@ -35,5 +35,3 @@ geekforgeeks
 ## 2. Given 1 million intgeres with too many duplicates with digits 1 - 9. Sort the inputs with O(n)
 
 [Sample Solution 1 for Counting Sort](handsonalgods/blob/main/src/main/java/sorting/countingsort/CountingSort.java)
-
-## leetcode problems
