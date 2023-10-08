@@ -8,7 +8,6 @@ public class SquirrelJump {
 	static int maxJumpStep = 0;
 	public static void main(String[] args) {
 	    int[] bars = null;
-	    
 		bars = new int[]{5,4,6,11,7,10,8,9,9,10,5,4,5};
 		SquirrelJump.jump(bars);
 		bars = new int[]{6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12};
@@ -27,12 +26,12 @@ public class SquirrelJump {
 		}
 		maxJumpStep = maxJumps;
 		int position = findMaxJumpPosition();
-		//positionForStep(bars,position);
-		List<Integer> steps = findStepsAtPosition(bars,position);
-		System.out.println(steps);
+		// positionForStep(bars,position);
+		// List<Integer> steps = findStepsAtPosition(bars,position);
+		// System.out.println(steps);
 		positionStepsMap.clear();
 		stepsMap.clear();
-		System.out.println("Max number of jumps: " + maxJumps);
+		System.out.println("Max number of jumps: " + maxJumps + " Position = " + position);
 	}
 
 	private static int jump(int[] bars, int position, Map<Integer, Integer> positionStepsMap) {
@@ -49,58 +48,24 @@ public class SquirrelJump {
 	}
 	public int positionAtStep(int step) {
 		// Write your code here
-		int position = 0;
 		System.out.println(positionStepsMap);
-		for(Map.Entry<Integer,Integer> entries : positionStepsMap.entrySet()){
-			if(entries.getValue() == step){
-				position = entries.getKey();
-				break;
-			}
-		}
+		int position = positionStepsMap.entrySet().stream()
+				.filter(e->e.getValue() == step )
+				.findFirst()
+				.get()
+				.getKey();
 		return position;
 	}
 
 	public static int findMaxJumpPosition(){
-		int position = 0;
-		for(Map.Entry<Integer,Integer> entries : positionStepsMap.entrySet()){
-			if(entries.getValue() == maxJumpStep){
-				position = entries.getKey();
-				break;
-			}
-		}
+		int position = positionStepsMap.entrySet().stream()
+				.filter(e->e.getValue() == maxJumpStep )
+				.findFirst()
+				.get()
+				.getKey();
 		return position;
 	}
-	public static List<Integer> findStepsAtPosition(int[] bars, int position) {
-		List<Integer> steps = new ArrayList<>();
-		Map<Integer,Integer> possibleJumpMap = null;
-		int i = position;
-		steps.add(position);
-		while(i >= 0 && i < bars.length){
-			possibleJumpMap = possibleJumpList(bars,i);
-			if(possibleJumpMap.size() == 0){
-				break;
-			}
-			i = possibleJumpMap.get(Collections.max(possibleJumpMap.keySet()));
-			steps.add(i);
-		}
-		return steps;
-	}
-	private static Map<Integer,Integer> possibleJumpList(int[] bars,int position){
-		Map<Integer,Integer> possibleJumpMap = new HashMap<Integer, Integer>();
-		if((position+2) < bars.length && bars[position+2] < bars[position] ){
-			possibleJumpMap.put(bars[position+2],position+2);
-		}
-		if((position+1) < bars.length && bars[position+1] < bars[position] ){
-			possibleJumpMap.put(bars[position+1],position+1);
-		}	
-		if((position-2) >= 0 && bars[position-2] < bars[position] ){
-			possibleJumpMap.put(bars[position-2],position-2);
-		}
-		if((position-1) >= 0 && bars[position-1] < bars[position] ){
-			possibleJumpMap.put(bars[position-1],position-1);
-		}	
-		return possibleJumpMap;
-	}
+
 	public static int positionForStep(int[] bars, int position) {
 		stepsMap.putIfAbsent("LEFT",new ArrayList<>());
 		int resultPos = 0;
@@ -172,5 +137,36 @@ public class SquirrelJump {
 		}
 		System.out.println(stepsMap);
 		return 0;
+	}
+	public static List<Integer> findStepsAtPosition(int[] bars, int position) {
+		List<Integer> steps = new ArrayList<>();
+		Map<Integer,Integer> possibleJumpMap = null;
+		int i = position;
+		steps.add(position);
+		while(i >= 0 && i < bars.length){
+			possibleJumpMap = possibleJumpMap(bars,i);
+			if(possibleJumpMap.size() == 0){
+				break;
+			}
+			i = possibleJumpMap.get(Collections.max(possibleJumpMap.keySet()));
+			steps.add(i);
+		}
+		return steps;
+	}
+	private static Map<Integer,Integer> possibleJumpMap(int[] bars, int position){
+		Map<Integer,Integer> possibleJumpMap = new HashMap<Integer, Integer>();
+		if((position+2) < bars.length && bars[position+2] < bars[position] ){
+			possibleJumpMap.put(bars[position+2],position+2);
+		}
+		if((position+1) < bars.length && bars[position+1] < bars[position] ){
+			possibleJumpMap.put(bars[position+1],position+1);
+		}
+		if((position-2) >= 0 && bars[position-2] < bars[position] ){
+			possibleJumpMap.put(bars[position-2],position-2);
+		}
+		if((position-1) >= 0 && bars[position-1] < bars[position] ){
+			possibleJumpMap.put(bars[position-1],position-1);
+		}
+		return possibleJumpMap;
 	}
 }
