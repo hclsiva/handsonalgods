@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class CoinChange {
 
-  
+  private static int[] d = new int[] {1,5,10,25,50,100};
   public CoinChange() {
     
   }
@@ -14,7 +14,7 @@ public class CoinChange {
   public int[] getChange(BigDecimal M, BigDecimal p) {
     
     int[] c = new int[6];
-    int[] d = new int[] {1,5,10,25,50,100};
+
 
     BigDecimal change = M.subtract(p);
     System.out.println("change " + change );
@@ -44,7 +44,9 @@ public class CoinChange {
   }
   public static void print(int[] result) {
     for (int i = 0; i < result.length; i++) {
-      System.out.println("index = " + i + " value = " + result[i]);
+      if(result[i] > 0) {
+        System.out.println("coin = " + d[i] + " value = " + result[i]);
+      }
     }
   }
 }

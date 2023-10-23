@@ -1,4 +1,4 @@
-package codility;
+package codility.ericsson._06_oct_2023;
 
 import java.util.ArrayList;
 import java.util.List;

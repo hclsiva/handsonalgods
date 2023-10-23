@@ -123,15 +123,12 @@ public class SquirrelJump {
 				if (bars[i] > bars[i+1]) {
 					resultPos = i + 1;
 				}
-			}
-			
-				else {
+			}else {
 				
 				break;
 			}
-
 			if(!(resultPos == i))
-			stepsMap.get("RIGHT").add(resultPos);
+				stepsMap.get("RIGHT").add(resultPos);
 			if(resultPos == i|| i >= bars.length-1)
 				break;
 		}
