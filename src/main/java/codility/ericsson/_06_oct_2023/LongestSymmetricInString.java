@@ -13,7 +13,6 @@ public class LongestSymmetricInString {
     private static List<String> generateCombinationsHelper(char[] chars, int index, List<String> l) {
         if (index == chars.length) {
             l.add(new String(chars));
-
             return l;
         }
         if (chars[index] == '?') {
@@ -41,25 +40,27 @@ public class LongestSymmetricInString {
         // Implement your solution here
         int max = 0;
         List<String> l = generateCombinations(S);
-                for(String li : l) {
+        for(String li : l) {
             for(int i=0; i<li.length();i++){
                 for(int j=i+1; j<li.length();j++){
-                    if(isSymmetric(li.substring(i,j+1)) & max < li.substring(i,j+1).length()) {
+                    if(isSymmetric(li.substring(i,j+1)) && max < li.substring(i,j+1).length()) {
                         max = li.substring(i,j+1).length();
                     }
                 }
             }
-
         }
         return max;
     }
     public static void main(String[] args) {
-          String input = "<><??>>";
-        //   String input = "??????";
-        //String input = "<<?";
         LongestSymmetricInString l = new LongestSymmetricInString();
+        String input = "<><??>>";
         int max = l.solution(input);
-
+        System.out.println(max);
+        input = "??????";
+        max = l.solution(input);
+        System.out.println(max);
+        input = "<<?";
+        max = l.solution(input);
         System.out.println(max);
     }
 
