@@ -64,7 +64,7 @@ public class SumOfTwoList {
         int[] b = IntStream.of(5,6).toArray();//IntStream.of(5,9,2).toArray();
         Node first = List(a);
         Node second = List(b);
-        Node result = new SumOfTwoList().sumFromHead(first,second);
+        Node result = new SumOfTwoList().sum(first,second,0);
         for(Node n = result; n != null;n = n.next){
             System.out.print(n.value + " -> ");
         }
